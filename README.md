@@ -12,7 +12,7 @@
 ## Exploring Next.js
 
 1. Create a `components` folder.
-2. Add a `hello.txt` file inside of `public/`.
+2. Add a `hello.txt` file inside of `public/` and write whatever you want in it.
    - Go to `http://localhost:3000/hello.txt`, what do you see?
 3. Add a `Footer.tsx` component inside of `components/` and a corresponding `Footer.module.css` file inside of `styles/`.
    - Add a `footer` tag and add some content to it
