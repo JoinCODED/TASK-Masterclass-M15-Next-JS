@@ -83,3 +83,73 @@
    - Add a link to our favicon
    - Bonus: allow the favicon to be overridden using the props
 3. Add the `Meta` component to your `Layout` component.
+
+## Data Fetching
+
+Use the following URL for making requests: `https://rickandmortyapi.com`. Have a look at it in Altair, and make sure to add `/graphql` when testing in Altair.
+
+1. Add the `client` to `api/index.ts`:
+
+   ```ts
+   import { ApolloClient, InMemoryCache } from "@apollo/client";
+
+   export const client = new ApolloClient({
+     uri: "YOUR_API_URL",
+     cache: new InMemoryCache(),
+   });
+   ```
+
+   - **Make sure to update the API url**
+
+2. Create a `characters` folder inside of `pages/` with an `index.tsx` inside of it and a corresponding `Character.module.css` inside of `styles/`.
+3. Use the client you set up to fetch characters and display them inside of `pages/characters/index.tsx`.
+
+   - Use `getServerSideProps` to fetch the `characters` and inject it into your page props.
+   - Read about `getServerSideProps` [here](https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props). Here is an Apollo example taken from this [blog](https://www.apollographql.com/blog/apollo-client/next-js/next-js-getting-started/):
+
+     ```ts
+     export async function getServerSideProps() {
+       const { data } = await client.query({
+         query: gql`
+           query Countries {
+             countries {
+               code
+               name
+               emoji
+             }
+           }
+         `,
+       });
+
+       return {
+         props: {
+           countries: data.countries.slice(0, 4),
+         },
+       };
+     }
+     ```
+
+4. Display a list of character cards in `/characters` and have a `Link` to each `character` detail page.
+   - Map over all the characters and display relevant information.
+   - Add a `Link` to each character in the map and have the `href=/characters/${character.id}`.
+5. Create an `[id].tsx` inside of `/characters`.
+
+   - Use `getServerSideProps` to get the current character for this page component:
+
+     ```tsx
+     import type { NextPageContext } from "next";
+
+     export async function getServerSideProps(context: NextPageContext) {
+       const characterId = context.params.id;
+
+       // fetch the character using the Apollo Client you created in `api/`
+
+       return {
+         props: {
+           character: data.PATH_TO_CHARACTER,
+         },
+       };
+     }
+     ```
+
+   - Display the character details in the page component
