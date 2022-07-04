@@ -86,7 +86,7 @@
 
 ## Data Fetching
 
-Use the following URL for making requests: `https://rickandmortyapi.com`. Have a look at it in Altair, and make sure to add `/graphql` when testing in Altair.
+Use the following URL for making requests: `https://rickandmortyapi.com/graphql`. Have a look at it in Altair.
 
 1. Add the `client` to `api/index.ts`:
 
