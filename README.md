@@ -140,7 +140,7 @@ Use the following URL for making requests: `https://rickandmortyapi.com/graphql`
      import type { NextPageContext } from "next";
 
      export async function getServerSideProps(context: NextPageContext) {
-       const characterId = context.params.id;
+       const characterId = context.query.id;
 
        // fetch the character using the Apollo Client you created in `api/`
 
